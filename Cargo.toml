@@ -1,0 +1,15 @@
+[package]
+name = "pyrolusite"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = "0.4.23" # Datetime for posts
+regex = "1.7.1"   # Markdown header parsing
+
+# Markdown parser
+pulldown-cmark = { version = "0.9.2", default-features = false, features = ["simd"] }
+
+lazy_static = "1.4.0" # Used together with `regex`
