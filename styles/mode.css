@@ -1,0 +1,49 @@
+:root {
+    --bg: white;
+    --text: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #131414;
+        --text: white;
+    }
+}
+
+#color-mode:checked ~ .post {
+    --bg: #131414;
+    --text: white;
+}
+
+@media (prefers-color-scheme: dark) {
+    #color-mode:checked ~ .post {
+        --bg: white;
+        --text: black;
+    }
+
+    #color-mode:checked ~ label .mode#dark {
+        display: none;
+    }
+    #color-mode:checked ~ label .mode#light {
+        display: block;
+        color: black;
+    }
+
+    #color-mode ~ label .mode#light {
+        display: none;
+    }
+    #color-mode ~ label .mode#dark {
+        display: block;
+        color: white;
+    }
+}
+
+label[for="color-mode"] {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+#color-mode {
+    display: none;
+}
