@@ -1,5 +1,5 @@
-use pulldown_cmark::{Parser, html::push_html};
-use crate::head::{MdHeader, parse_md_header};
+use comrak::{ComrakOptions, ComrakPlugins, markdown_to_html_with_plugins};
+use crate::{head::{MdHeader, parse_md_header}, syntect::SyntectAdapter};
 use lazy_static::lazy_static;
 use regex::Regex;
 
@@ -31,10 +31,15 @@ pub fn parse_md(doc: &str) -> Option<MdDoc> {
     // Get the lines from the header.
     let body = captures[1].trim();
 
-    // Parse the markdown to html:
-    let parser = Parser::new(body);
-    let mut html_body = String::new();
-    push_html(&mut html_body, parser);
+    // Setup the syntect adapter:
+    let adapter = SyntectAdapter::new();
+    let mut options = ComrakOptions::default();
+    options.extension.tasklist = true;
+    let mut plugins = ComrakPlugins::default();
+    plugins.render.codefence_syntax_highlighter = Some(&adapter);
 
-    Some(MdDoc { meta, content: html_body })
+    // Parse the markdown body.
+    let formatted = markdown_to_html_with_plugins(body, &options, &plugins);
+
+    Some(MdDoc { meta, content: formatted })
 }

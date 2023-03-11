@@ -24,17 +24,16 @@ body {
 
 .post nav {
     position: fixed;
-    max-width: 1280px;
-    width: 80vw;
+    width: 100vw;
     height: 56px;
     display: flex;
     align-items: center;
 }
 
 .post nav svg {
-    width: 40px;
-    height: 40px;
-    margin-right: 4px;
+    width: 24px;
+    height: 24px;
+    margin: 0 16px;
 }
 
 .post nav .title {
@@ -49,7 +48,6 @@ body {
 
 .post nav .title > span {
     font-size: 12px;
-    font-weight: 600;
     opacity: .5;
 }
 
@@ -69,21 +67,33 @@ body {
     text-align: left;
 }
 
-/* .post article h1 {
-    text-align: center;
-} */
-
 .post article p {
     margin: 8px 0;
 }
 
+.post article pre {
+    align-self: baseline;
+    font-size: 14px;
+
+    padding: 0 20px;
+    border-radius: 12px;
+    min-width: 256px;
+}
+
 .post article code {
     font-family: JetBrains Mono;
-    opacity: .65;
 }
 
 .post article sup {
     opacity: .35;
+}
+
+.post article ul {
+    list-style-type: none;
+}
+
+.post article > ul {
+    padding: 0 0 0 4px;
 }
 
 .post footer {

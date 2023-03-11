@@ -5,6 +5,7 @@ use doc::parse_md;
 mod head;
 mod doc;
 mod render;
+mod syntect;
 
 const DOC: &'static str = include_str!("../md/test.md");
 
