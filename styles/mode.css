@@ -42,6 +42,13 @@ label[for="color-mode"] {
     position: absolute;
     top: 16px;
     right: 16px;
+
+    cursor: pointer;
+    opacity: .5;
+}
+
+label[for="color-mode"]:hover {
+    opacity: 1;
 }
 
 #color-mode {

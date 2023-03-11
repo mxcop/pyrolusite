@@ -34,7 +34,7 @@ fn main() {
     let post = render_post(&doc);
 
     std::fs::write(Path::new("./dist/test.html"), &post).unwrap();
-    //std::fs::write(Path::new("./dist/tmpl.css"), CSS).unwrap();
 
+    // Copy all stylesheets to the `/dist` directory.
     copy_recursively(Path::new("./styles/"), Path::new("./dist/")).unwrap();
 }
