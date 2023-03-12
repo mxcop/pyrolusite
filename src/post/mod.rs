@@ -37,11 +37,11 @@ pub fn render_post(filename: &str, doc: &str) -> Doc {
     context.insert("title", &doc.meta.title);
 
     let date = &doc.meta.date;
-    let date_str = format!("{}/{}/{}", date.day(), date.month(), date.year());
+    let date_str = format!("{} / {} / {}", date.day(), date.month(), date.year());
     context.insert("date", &date_str);
 
     let size = &(doc.content.len() as f32 * 0.001);
-    let size_str = format!("{0:.2}kB", size);
+    let size_str = format!("{0:.2} kB", size);
     context.insert("size", &size_str);
 
     context.insert("description", &doc.meta.desc);
