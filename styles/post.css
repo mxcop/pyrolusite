@@ -35,6 +35,7 @@ body {
 
     border-bottom: 1.5px solid var(--border);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     background-color: var(--navbar);
 }
 
