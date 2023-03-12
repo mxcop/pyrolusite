@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test blog post</title>
+    <meta name="description" content="Blog post meant for testing the static site gen.">
+    <meta name="author" content="Max (mxcop)">
+    <link rel="stylesheet" href="post.css">
+</head>
+<body>
+    <!-- CSS only dark mode switch -->
+    <input type="checkbox" id="color-mode">
+    <label for="color-mode">
+        <svg class="mode" id="light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 1.992a10 10 0 1 0 9.236 13.838c.341-.82-.476-1.644-1.298-1.31a6.5 6.5 0 0 1-6.864-10.787l.077-.08c.551-.63.113-1.653-.758-1.653h-.266l-.068-.006l-.06-.002z"/></g></svg>
+        <svg class="mode" id="dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 19a1 1 0 0 1 .993.883L13 20v1a1 1 0 0 1-1.993.117L11 21v-1a1 1 0 0 1 1-1zm6.313-2.09l.094.083l.7.7a1 1 0 0 1-1.32 1.497l-.094-.083l-.7-.7a1 1 0 0 1 1.218-1.567l.102.07zm-11.306.083a1 1 0 0 1 .083 1.32l-.083.094l-.7.7a1 1 0 0 1-1.497-1.32l.083-.094l.7-.7a1 1 0 0 1 1.414 0zM4 11a1 1 0 0 1 .117 1.993L4 13H3a1 1 0 0 1-.117-1.993L3 11h1zm17 0a1 1 0 0 1 .117 1.993L21 13h-1a1 1 0 0 1-.117-1.993L20 11h1zM6.213 4.81l.094.083l.7.7a1 1 0 0 1-1.32 1.497l-.094-.083l-.7-.7A1 1 0 0 1 6.11 4.74l.102.07zm12.894.083a1 1 0 0 1 .083 1.32l-.083.094l-.7.7a1 1 0 0 1-1.497-1.32l.083-.094l.7-.7a1 1 0 0 1 1.414 0zM12 2a1 1 0 0 1 .993.883L13 3v1a1 1 0 0 1-1.993.117L11 4V3a1 1 0 0 1 1-1zm0 5a5 5 0 1 1-4.995 5.217L7 12l.005-.217A5 5 0 0 1 12 7z"/></g></svg>
+    </label>
+
+    <main class="post">
+        <nav>
+            <div class="title">
+                <h3>Test blog post</h3>
+                <span>1.53 kB — 10 / 3 / 2023</span>
+            </div>
+        </nav>
+    
+        <article>
+            <h1>Hello world!</h1>
+<p>From the <em>test</em> blog post :D</p>
+<pre style="background-color:#191919;"><code class="language-c">
+<span style="color:#95cc5e;">int </span><span style="color:#60a365;">main</span><span style="color:#e8d4c0;">() {
+</span><span style="color:#e8d4c0;">    </span><span style="color:#db784d;">return </span><span style="color:#eaae2e;">0</span><span style="color:#e8d4c0;">;
+</span><span style="color:#e8d4c0;">}
+</span>
+</code></pre>
+<h3>Some Rust code</h3>
+<pre style="background-color:#191919;"><code class="language-rs">
+<span style="color:#95cc5e;">fn </span><span style="color:#60a365;">main</span><span style="color:#e8d4c0;">() {
+</span><span style="color:#e8d4c0;">    println!(</span><span style="color:#eaae2e;">&quot;</span><span style="color:#db784d;">{}</span><span style="color:#eaae2e;">&quot;</span><span style="color:#e8d4c0;">, </span><span style="color:#95cc5e;">hello</span><span style="color:#e8d4c0;">());
+</span><span style="color:#e8d4c0;">}
+</span><span style="color:#e8d4c0;">
+</span><span style="color:#7a7267;">/// A static string saying `Hello world!`
+</span><span style="color:#95cc5e;">fn </span><span style="color:#60a365;">hello</span><span style="color:#e8d4c0;">() -&gt; </span><span style="color:#db784d;">&amp;&#39;static </span><span style="color:#95cc5e;">str </span><span style="color:#e8d4c0;">{
+</span><span style="color:#e8d4c0;">    </span><span style="color:#eaae2e;">&quot;Hello world!&quot;
+</span><span style="color:#e8d4c0;">}
+</span>
+</code></pre>
+        </article>
+    
+        <footer>
+            © 2023 Max, All rights reserved.
+        </footer>
+    </main>
+</body>
+</html>

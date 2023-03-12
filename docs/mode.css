@@ -1,0 +1,69 @@
+:root {
+    --bg: #fff;
+    --text: #000;
+    --text-dim: #888;
+    --border: #0001;
+    --navbar: hsla(0,0%,100%,.85);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #131414;
+        --text: #fff;
+        --text-dim: #444;
+        --border: #fff1;
+        --navbar: hsla(0,0%,7%,.8);
+    }
+}
+
+#color-mode:checked ~ main {
+    --bg: #131414;
+    --text: #fff;
+    --text-dim: #444;
+    --border: #fff1;
+    --navbar: hsla(0,0%,7%,.8);
+}
+
+@media (prefers-color-scheme: dark) {
+    #color-mode:checked ~ main {
+        --bg: #fff;
+        --text: #000;
+        --text-dim: #888;
+        --border: #0001;
+        --navbar: hsla(0,0%,100%,.85);
+    }
+
+    #color-mode:checked ~ label .mode#dark {
+        display: none;
+    }
+    #color-mode:checked ~ label .mode#light {
+        display: block;
+        color: #000;
+    }
+
+    #color-mode ~ label .mode#light {
+        display: none;
+    }
+    #color-mode ~ label .mode#dark {
+        display: block;
+        color: #fff;
+    }
+}
+
+label[for="color-mode"] {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+
+    cursor: pointer;
+    opacity: .5;
+    z-index: 1;
+}
+
+label[for="color-mode"]:hover {
+    opacity: 1;
+}
+
+#color-mode {
+    display: none;
+}
