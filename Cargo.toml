@@ -11,6 +11,7 @@ regex = "1.7.1"   # Markdown header parsing
 
 # Template engine
 tera = { version = "1.18.0", default-features = false }
+serde = "1.0.155"
 
 # Markdown parser
 comrak = "0.16"

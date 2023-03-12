@@ -1,14 +1,10 @@
 use std::path::Path;
-use render::render_post;
-use doc::parse_md;
+use blog::{render_blog, home::render_home};
 
-mod head;
-mod doc;
-mod render;
-mod syntect;
+mod post;
+mod blog;
 
-const DOC: &'static str = include_str!("../md/test.md");
-
+/// Used for copying styles to the build directory.
 fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> std::io::Result<()> {
     std::fs::create_dir_all(&destination)?;
     for entry in std::fs::read_dir(source)? {
@@ -24,17 +20,11 @@ fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> 
 }
 
 fn main() {
-    let doc = parse_md(DOC).unwrap();
+    let posts = render_blog(Path::new("./md/"));
 
-    // Create the build directory:
-    if Path::new("./dist/").is_dir() == false {
-        std::fs::create_dir("./dist/")
-            .expect("failed to create `./dist`");
-    }
+    let home = render_home(&posts);
 
-    let post = render_post(&doc);
-
-    std::fs::write(Path::new("./dist/test.html"), &post).unwrap();
+    std::fs::write(Path::new("./dist/index.html"), &home).expect("failed to save home page");
 
     // Copy all stylesheets to the `/dist` directory.
     copy_recursively(Path::new("./styles/"), Path::new("./dist/")).unwrap();

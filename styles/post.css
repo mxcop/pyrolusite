@@ -28,6 +28,7 @@ body {
     height: 56px;
     display: flex;
     align-items: center;
+    pointer-events: none;
 }
 
 .post nav svg {

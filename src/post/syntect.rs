@@ -41,7 +41,7 @@ impl SyntectAdapter {
     /// Construct a new `SyntectAdapter` object and set the syntax highlighting theme.
     pub fn new() -> Self {
         SyntectAdapter {
-            theme: ThemeSet::get_theme(Path::new("./src/syntect/earthsong.tmTheme")).unwrap(),
+            theme: ThemeSet::get_theme(Path::new("./static/earthsong.tmTheme")).unwrap(),
             syntax_set: SyntaxSet::load_defaults_newlines()
         }
     }

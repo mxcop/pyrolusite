@@ -17,4 +17,12 @@ My personal static blog generater written in Rust.
 
 <br>
 
+## Build
+This command will build all markdown files inside `./md/` into `./dist/`.
+```sh
+$ cargo run
+```
+
+<br>
+
 <sub>© 2023 Max, All rights reserved.</sub>

@@ -10,13 +10,13 @@
     }
 }
 
-#color-mode:checked ~ .post {
+#color-mode:checked ~ main {
     --bg: #131414;
     --text: white;
 }
 
 @media (prefers-color-scheme: dark) {
-    #color-mode:checked ~ .post {
+    #color-mode:checked ~ main {
         --bg: white;
         --text: black;
     }

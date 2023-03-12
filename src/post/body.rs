@@ -1,7 +1,8 @@
 use comrak::{ComrakOptions, ComrakPlugins, markdown_to_html_with_plugins};
-use crate::{head::{MdHeader, parse_md_header}, syntect::SyntectAdapter};
 use lazy_static::lazy_static;
 use regex::Regex;
+
+use super::{head::{MdHeader, parse_md_header}, syntect::SyntectAdapter};
 
 lazy_static! {
     static ref REGEX_SELECT_BODY: Regex = Regex::new(r"[\s]-{3,}([\s\S]*)").unwrap();
@@ -17,9 +18,9 @@ pub struct MdDoc {
 }
 
 /// Parse a markdown document to meta data and html.
-pub fn parse_md(doc: &str) -> Option<MdDoc> {
+pub fn parse_md(filename: &str, doc: &str) -> Option<MdDoc> {
     // Parse the document header.
-    let Some(meta) = parse_md_header(doc) else {
+    let Some(meta) = parse_md_header(filename, doc) else {
         return None;
     };
 
