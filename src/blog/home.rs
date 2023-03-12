@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{path::Path, str::from_utf8};
 use tera::{Tera, Context};
 use lazy_static::lazy_static;
 use crate::post::head::MdHeader;
@@ -23,6 +23,12 @@ pub fn render_home(posts: &Vec<MdHeader>) -> String {
     let mut context = Context::new();
     context.insert("posts", posts);
 
-    // Render the post.
-    TEMPLATES.render("home", &context).expect("failed to render home")
+    // Render the home page.
+    let page = TEMPLATES.render("home", &context).expect("failed to render home");
+
+    from_utf8(&minify_html::minify(
+        page.as_bytes(),
+        &minify_html::Cfg::default(),
+    ))
+    .expect("failed to minify home page").to_string()
 }

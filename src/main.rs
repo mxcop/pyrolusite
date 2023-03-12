@@ -1,5 +1,6 @@
 use std::path::Path;
 use blog::{render_blog, home::render_home};
+use css_minify::optimizations::{Minifier, Level};
 
 mod post;
 mod blog;
@@ -13,7 +14,9 @@ fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> 
         if filetype.is_dir() {
             copy_recursively(entry.path(), destination.as_ref().join(entry.file_name()))?;
         } else {
-            std::fs::copy(entry.path(), destination.as_ref().join(entry.file_name()))?;
+            let file = std::fs::read_to_string(entry.path())?;
+            let minified = Minifier::default().minify(&file, Level::Three).expect("failed to minify css");
+            std::fs::write(destination.as_ref().join(entry.file_name()), &minified)?;
         }
     }
     Ok(())
