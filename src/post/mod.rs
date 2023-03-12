@@ -1,13 +1,13 @@
-use std::path::Path;
-use chrono::Datelike;
-use tera::{Tera, Context};
-use body::parse_md;
-use lazy_static::lazy_static;
 use self::head::MdHeader;
+use body::parse_md;
+use chrono::Datelike;
+use lazy_static::lazy_static;
+use std::{path::Path, str::from_utf8};
+use tera::{Context, Tera};
 
-mod syntect;
 pub mod body;
 pub mod head;
+mod syntect;
 
 // Build the template files:
 lazy_static! {
@@ -26,7 +26,7 @@ lazy_static! {
 
 pub struct Doc {
     pub meta: MdHeader,
-    pub content: String
+    pub content: String,
 }
 
 pub fn render_post(filename: &str, doc: &str) -> Doc {
@@ -40,15 +40,27 @@ pub fn render_post(filename: &str, doc: &str) -> Doc {
     let date_str = format!("{} / {} / {}", date.day(), date.month(), date.year());
     context.insert("date", &date_str);
 
-    let size = &(doc.content.len() as f32 * 0.001);
-    let size_str = format!("{0:.2} kB", size);
-    context.insert("size", &size_str);
+    // Get the size + the extra size from the html.
+    let size = doc.content.len() + 1930;
+    context.insert("size", &size);
 
     context.insert("description", &doc.meta.desc);
     context.insert("article", &doc.content.trim());
 
     // Render the post.
     let content = TEMPLATES.render("post", &context).unwrap();
+    let content = from_utf8(&minify_html::minify(
+        content.as_bytes(),
+        &minify_html::Cfg::default(),
+    ))
+    .expect("failed to minify post").to_string();
 
-    Doc { meta: doc.meta, content }
+    let real_size = &(content.len() as f32 * 0.001);
+    let real_size_str = format!("{:.2} kB", real_size);
+    println!("{}\n- size: {}", filename, real_size_str);
+
+    Doc {
+        meta: doc.meta,
+        content,
+    }
 }
