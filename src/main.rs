@@ -23,6 +23,8 @@ fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> 
 }
 
 fn main() {
+    std::fs::create_dir_all(Path::new("./dist/")).expect("failed to create `./dist/` directory");
+
     let posts = render_blog(Path::new("./md/"));
 
     let home = render_home(&posts);
