@@ -1,5 +1,6 @@
 # Pyrolusite
 My personal static blog generater written in Rust.
+[<sup>Demo</sup>](https://mxcop.github.io/pyrolusite)
 
 <br>
 
