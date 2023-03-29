@@ -42,5 +42,7 @@ pub fn parse_md(filename: &str, doc: &str) -> Option<MdDoc> {
     // Parse the markdown body.
     let formatted = markdown_to_html_with_plugins(body, &options, &plugins);
 
+    let formatted = formatted.replace("\n", "<br>");
+
     Some(MdDoc { meta, content: formatted })
 }
