@@ -1,12 +1,10 @@
 use chrono::NaiveDate;
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use regex::Regex;
 use serde::Serialize;
 use serde::ser::SerializeStruct;
 
-lazy_static! {
-    static ref REGEX_SELECT_HEADER: Regex = Regex::new(r"([\s\S]*?)[\s]-{3,}").unwrap();
-}
+pub static REGEX_SELECT_HEADER: Lazy<Regex> = Lazy::new(|| Regex::new(r"([\s\S]*?)[\s]-{3,}").unwrap());
 
 /// Markdown document header.
 #[derive(Debug)]

@@ -1,12 +1,9 @@
+use super::{head::{MdHeader, parse_md_header}, syntect::SyntectAdapter};
 use comrak::{ComrakOptions, ComrakPlugins, markdown_to_html_with_plugins};
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use regex::Regex;
 
-use super::{head::{MdHeader, parse_md_header}, syntect::SyntectAdapter};
-
-lazy_static! {
-    static ref REGEX_SELECT_BODY: Regex = Regex::new(r"[\s]-{3,}([\s\S]*)").unwrap();
-}
+pub static REGEX_SELECT_BODY: Lazy<Regex> = Lazy::new(|| Regex::new(r"[\s]-{3,}([\s\S]*)").unwrap());
 
 /// Markdown document.
 #[derive(Debug)]

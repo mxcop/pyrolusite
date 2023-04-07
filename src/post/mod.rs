@@ -1,7 +1,7 @@
 use self::head::MdHeader;
 use body::parse_md;
 use chrono::Datelike;
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use std::{path::Path, str::from_utf8};
 use tera::{Context, Tera};
 
@@ -10,19 +10,17 @@ pub mod head;
 mod syntect;
 
 // Build the template files:
-lazy_static! {
-    pub static ref TEMPLATES: Tera = {
-        let mut tera = Tera::default();
+pub static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
+    let mut tera = Tera::default();
 
-        if let Err(e) = tera.add_template_file(Path::new("./static/post.html"), Some("post")) {
-            println!("Parsing error(s): {}", e);
-            ::std::process::exit(1);
-        };
-
-        tera.autoescape_on(vec![]); // Disable auto escape.
-        tera
+    if let Err(e) = tera.add_template_file(Path::new("./static/post.html"), Some("post")) {
+        println!("Parsing error(s): {}", e);
+        ::std::process::exit(1);
     };
-}
+
+    tera.autoescape_on(vec![]); // Disable auto escape.
+    tera
+});
 
 pub struct Doc {
     pub meta: MdHeader,

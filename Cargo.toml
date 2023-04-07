@@ -20,4 +20,4 @@ serde = "1.0.155"
 comrak = "0.16"
 syntect = "5.0"
 
-lazy_static = "1.4.0" # Used together with `regex` & `tera`
+once_cell = "1.16" # Used for lazy static variables

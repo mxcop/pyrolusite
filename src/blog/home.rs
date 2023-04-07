@@ -1,22 +1,20 @@
 use std::{path::Path, str::from_utf8};
 use tera::{Tera, Context};
-use lazy_static::lazy_static;
 use crate::post::head::MdHeader;
+use once_cell::sync::Lazy;
 
 // Build the template files:
-lazy_static! {
-    pub static ref TEMPLATES: Tera = {
-        let mut tera = Tera::default();
+pub static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
+    let mut tera = Tera::default();
 
-        if let Err(e) = tera.add_template_file(Path::new("./static/home.html"), Some("home")) {
-            println!("Parsing error(s): {}", e);
-            ::std::process::exit(1);
-        };
-
-        tera.autoescape_on(vec![]); // Disable auto escape.
-        tera
+    if let Err(e) = tera.add_template_file(Path::new("./static/home.html"), Some("home")) {
+        println!("Parsing error(s): {}", e);
+        ::std::process::exit(1);
     };
-}
+
+    tera.autoescape_on(vec![]); // Disable auto escape.
+    tera
+});
 
 pub fn render_home(posts: &Vec<MdHeader>) -> String {
     // Setup the post context:
