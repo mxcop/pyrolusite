@@ -936,6 +936,7 @@ name = "pyrolusite"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "clap",
  "comrak",
  "css-minify",
  "minify-html",

@@ -21,3 +21,6 @@ comrak = "0.16"
 syntect = "5.0"
 
 once_cell = "1.16" # Used for lazy static variables
+
+# CLI arguments parser
+clap = { version = "4.2.1", features = ["derive"] }
