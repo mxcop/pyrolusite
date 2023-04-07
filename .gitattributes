@@ -1,0 +1,4 @@
+# Remove example directories from the language stats in github
+docs/** linguist-vendored
+static/** linguist-vendored
+styles/** linguist-vendored
