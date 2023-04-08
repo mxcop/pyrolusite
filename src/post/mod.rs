@@ -2,7 +2,7 @@ use self::head::MdHeader;
 use body::parse_md;
 use chrono::Datelike;
 use once_cell::sync::Lazy;
-use std::{path::Path, str::from_utf8};
+use std::str::from_utf8;
 use tera::{Context, Tera};
 
 pub mod body;
@@ -13,7 +13,7 @@ mod syntect;
 pub static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
     let mut tera = Tera::default();
 
-    if let Err(e) = tera.add_template_file(Path::new("./static/post.html"), Some("post")) {
+    if let Err(e) = tera.add_raw_template("post", include_str!("../../static/post.html")) {
         println!("Parsing error(s): {}", e);
         ::std::process::exit(1);
     };

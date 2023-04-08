@@ -12,7 +12,7 @@ pub struct Args {
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
-    /// Build the cpm project.
+    /// Parse a pyrolusite markdown blog.
     Build {
         /// Path to the markdown files to compile.
         #[arg(default_value = ".")]
@@ -20,7 +20,7 @@ pub enum Commands {
         /// Build directory.
         #[arg(short, long, default_value = "./build/")]
         output: String,
-        /// Stylesheets directory, contents copied into the build directory if it exists.
+        /// Copied into the build directory if it exists.
         #[arg(short, long, default_value = "./styles/")]
         styles: String,
     }

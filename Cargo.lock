@@ -932,7 +932,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pyrolusite"
+name = "pyro"
 version = "0.1.0"
 dependencies = [
  "chrono",

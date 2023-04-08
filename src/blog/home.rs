@@ -1,4 +1,4 @@
-use std::{path::Path, str::from_utf8};
+use std::str::from_utf8;
 use tera::{Tera, Context};
 use crate::post::head::MdHeader;
 use once_cell::sync::Lazy;
@@ -7,7 +7,7 @@ use once_cell::sync::Lazy;
 pub static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
     let mut tera = Tera::default();
 
-    if let Err(e) = tera.add_template_file(Path::new("./static/home.html"), Some("home")) {
+    if let Err(e) = tera.add_raw_template("home", include_str!("../../static/home.html")) {
         println!("Parsing error(s): {}", e);
         ::std::process::exit(1);
     };
