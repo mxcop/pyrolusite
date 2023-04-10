@@ -7,7 +7,7 @@ use super::blog::{render_blog, home::render_home};
 pub fn build(path: &String, output: &String, styles: &String) -> io::Result<()> {
     fs::create_dir_all(Path::new(output))?;
 
-    let posts = render_blog(Path::new(path), Path::new(output));
+    let posts = render_blog(Path::new(path), Path::new(output))?;
     let home = render_home(&posts);
 
     fs::write(Path::new(output).join("./index.html"), &home)?;
@@ -26,14 +26,28 @@ fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> 
     fs::create_dir_all(&destination)?;
     for entry in fs::read_dir(source)? {
         let entry = entry?;
-        let filetype = entry.file_type()?;
-        if filetype.is_dir() {
-            copy_recursively(entry.path(), destination.as_ref().join(entry.file_name()))?;
-        } else {
-            let file = fs::read_to_string(entry.path())?;
-            let minified = Minifier::default().minify(&file, Level::Three).expect("failed to minify css");
-            fs::write(destination.as_ref().join(entry.file_name()), &minified)?;
+        let path = entry.path();
+        let filename = entry.file_name();
+
+        // We need to go deeper...
+        if path.is_dir() {
+            copy_recursively(&path, destination.as_ref().join(&filename))?;
+            continue;
         }
+
+        // Copy the file.
+        let file = fs::read_to_string(&path)?;
+        let Some(ext) = path.extension() else {
+            continue;
+        };
+
+        // Minify if the file is .css
+        let minified = if ext == "css" {
+            Minifier::default().minify(&file, Level::Three).expect("failed to minify css")
+        } else {
+            file
+        };
+        fs::write(destination.as_ref().join(&filename), &minified)?;
     }
     Ok(())
 }
