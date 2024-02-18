@@ -1,4 +1,4 @@
-@import url('./mode.css');
+@import url('./vars.css');
 
 html, body {
     background-color: var(--bg);
@@ -28,39 +28,47 @@ body {
     overflow: hidden;
 }
 
-.post nav {
-    position: fixed;
-    width: 100vw;
-    height: 56px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-bottom: 1.5px solid var(--border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background-color: var(--navbar);
-}
-
-.post nav .title {
+.post .title {
+    font-family: Monocraft, monospace;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 0 4px 0;
+    align-items: flex-start;
+    margin-right: auto;
+    margin-bottom: 3em;
+    transform: rotateZ(-3deg) translateX(-24px);
 }
 
-.post nav .title > h3 {
+.cube {
+    image-rendering: pixelated;
+    background-image: url(./vacuum-tube.png);
+    background-size: contain;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.3em;
+}
+
+.post .title > h1 {
+    font-size: 2em;
+    text-decoration: underline #f3a23f 0.12em;
+    text-underline-offset: 0.12em;
+    color: #eee;
+    line-height: 1.5em;
+    max-width: calc(100vw - 256px);
     margin: 0;
+    display: flex;
+    align-items: center;
 }
 
-.post nav .title > span {
-    font-size: 12px;
-    margin-top: 4px;
-    opacity: .5;
+.post .title > span {
+    font-size: 15px;
+    color: #999;
+    margin-bottom: 0.5em;
 }
 
 .post article {
+    font-family: Rokkitt, sans-serif;
+    font-size: 16pt;
+    color: #fceede;
     flex-grow: 1;
     display: flex;
 
@@ -68,8 +76,27 @@ body {
     align-items: stretch;
 
     max-width: 1280px;
-    width: calc(100vw - 64px);
-    padding: 56px 32px 0 32px;
+    width: calc(100vw - 128px);
+    padding: 56px 64px 0 64px;
+}
+
+.post article h3, .post article h2, .post article h1 {
+    font-family: Monocraft, monospace;
+    text-decoration: underline #f3a23f 0.12em;
+    text-underline-offset: 0.12em;
+    color: #eee;
+}
+
+.post article h3 {
+    font-size: 1.0em;
+}
+
+.post article h2 {
+    font-size: 1.20em;
+}
+
+.post article h1 {
+    font-size: 1.35em;
 }
 
 @media only screen and (min-width: 1280px) {
@@ -97,7 +124,7 @@ body {
     font-size: 14px;
 
     padding: 0 20px;
-    border-radius: 12px;
+    border-radius: 6px;
     max-width: calc(100vw - 104px);
 
     overflow: auto;
@@ -105,6 +132,12 @@ body {
 
 .post article code {
     font-family: var(--font-mono);
+    font-size: 0.75em;
+}
+
+.post article pre code {
+    font-family: var(--font-mono);
+    font-size: 1.0em;
 }
 
 .post article sup {
@@ -128,8 +161,9 @@ body {
     justify-content: center;
     align-items: center;
 
+    font-family: Monocraft, monospace;
     font-size: 12px;
-    padding: 0 32px;
+    padding: 0 64px;
     color: var(--text-dim);
 }
 

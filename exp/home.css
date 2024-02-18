@@ -1,0 +1,53 @@
+@font-face {
+    font-family: SplineMono;
+    src: url(spline-mono.woff2);
+}
+
+body {
+    background-color: #1b1b1b;
+    color: #fcedd2;
+
+    font-family: SplineMono, sans-serif;
+}
+
+.arrow {
+    image-rendering: pixelated;
+    background-image: url(./arrow.png);
+    background-size: cover;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}
+
+h3 {
+    overflow: hidden;
+    position: relative;
+    padding: 2rem;
+}
+
+h3::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    --color: #8667b8;
+	width: 1380px;
+	height: 1380px;
+	background:
+  radial-gradient(circle at 100% 50%, transparent 20%, var(--color) 21%,
+    var(--color) 34%, transparent 35%, transparent),
+  radial-gradient(circle at 0% 50%, transparent 20%, var(--color) 21%, var(--color) 34%, transparent 35%, transparent) 0 -50px;
+background-color: #9775ce;
+background-size: 75px 100px;
+	transform: translate(-50%, -50%) rotateZ(-45deg);
+    z-index: -1;
+}

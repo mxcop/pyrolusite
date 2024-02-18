@@ -1,3 +1,35 @@
+Test blog post
+10/03/2023
+
+Blog post meant for testing the static site gen.
+
+---
+From the *test* blog post :D
+
+```c
+int main() {
+    return 0;
+}
+```
+
+# Rust Language
+
+$\square_{\max{}} = \begin{pmatrix} x_{\max{}} \\ y_{\max{}} \\ z_{\max{}} \end{pmatrix}$
+
+Here is some `Rust` code :
+
+```rs
+fn main() {
+    println!("{}", hello());
+}
+
+/// A static string saying `Hello world!`
+fn hello() -> &'static str {
+    "Hello world!"
+}
+```
+
+```rs
 use body::MdDoc;
 use head::MdHeader;
 use chrono::Datelike;
@@ -64,3 +96,4 @@ pub fn render_post(filename: &str, doc: &str) -> Option<Doc> {
         content,
     })
 }
+```

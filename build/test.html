@@ -1,0 +1,85 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=IE=edge http-equiv=X-UA-Compatible><meta content=width=device-width,initial-scale=1.0 name=viewport><title>Test blog post</title><meta content="Blog post meant for testing the static site gen.
+"name=description><meta content="Max (mxcop)"name=author><link href=post.css rel=stylesheet><body><main class=post><article><div class=title><span>10/3/2023 ~ 14.92 kB ~ 36 minutes ~ #rust ~ #optimization</span><h1><div title="Vacuum Tube"class=cube></div> Test blog post</h1></div><p>From the <em>test</em> blog post :D<pre style=background-color:#191919;><code class=language-c>
+<span style=color:#95cc5e;>int </span><span style=color:#60a365;>main</span><span style=color:#e8d4c0;>() {
+</span><span style=color:#e8d4c0;>    </span><span style=color:#db784d;>return </span><span style=color:#eaae2e;>0</span><span style=color:#e8d4c0;>;
+</span><span style=color:#e8d4c0;>}
+</span>
+</code></pre><h1>Rust Language</h1><p>$\square_{\max{}} = \begin{pmatrix} x_{\max{}} \ y_{\max{}} \ z_{\max{}} \end{pmatrix}$<p>Here is some <code>Rust</code> code :<pre style=background-color:#191919;><code class=language-rs>
+<span style=color:#95cc5e;>fn </span><span style=color:#60a365;>main</span><span style=color:#e8d4c0;>() {
+</span><span style=color:#e8d4c0;>    println!(</span><span style=color:#eaae2e;>"</span><span style=color:#db784d;>{}</span><span style=color:#eaae2e;>"</span><span style=color:#e8d4c0;>, </span><span style=color:#95cc5e;>hello</span><span style=color:#e8d4c0;>());
+</span><span style=color:#e8d4c0;>}
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#7a7267;>/// A static string saying `Hello world!`
+</span><span style=color:#95cc5e;>fn </span><span style=color:#60a365;>hello</span><span style=color:#e8d4c0;>() -> </span><span style=color:#db784d;>&'static </span><span style=color:#95cc5e;>str </span><span style=color:#e8d4c0;>{
+</span><span style=color:#e8d4c0;>    </span><span style=color:#eaae2e;>"Hello world!"
+</span><span style=color:#e8d4c0;>}
+</span>
+</code></pre><pre style=background-color:#191919;><code class=language-rs>
+<span style=color:#9a9082;>use </span><span style=color:#e8d4c0;>body::MdDoc;
+</span><span style=color:#9a9082;>use </span><span style=color:#e8d4c0;>head::MdHeader;
+</span><span style=color:#9a9082;>use </span><span style=color:#e8d4c0;>chrono::Datelike;
+</span><span style=color:#9a9082;>use </span><span style=color:#e8d4c0;>once_cell::sync::Lazy;
+</span><span style=color:#9a9082;>use </span><span style=color:#e8d4c0;>std::str::from_utf8;
+</span><span style=color:#9a9082;>use </span><span style=color:#e8d4c0;>tera::{Context, Tera};
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#db784d;>pub </span><span style=color:#95cc5e;>mod </span><span style=color:#e8d4c0;>body;
+</span><span style=color:#db784d;>pub </span><span style=color:#95cc5e;>mod </span><span style=color:#e8d4c0;>head;
+</span><span style=color:#95cc5e;>mod </span><span style=color:#e8d4c0;>syntect;
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#7a7267;>// Build the template files:
+</span><span style=color:#db784d;>pub </span><span style=color:#95cc5e;>static </span><span style=color:#db784d;>TEMPLATES</span><span style=color:#e8d4c0;>: Lazy&LTTera> </span><span style=color:#db784d;>= </span><span style=color:#e8d4c0;>Lazy::new(|| {
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let </span><span style=color:#db784d;>mut</span><span style=color:#e8d4c0;> tera </span><span style=color:#db784d;>= </span><span style=color:#e8d4c0;>Tera::default();
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=color:#db784d;>if </span><span style=color:#95cc5e;>let </span><span style=font-style:italic;color:#db784d;>Err</span><span style=color:#e8d4c0;>(e) </span><span style=color:#db784d;>=</span><span style=color:#e8d4c0;> tera.</span><span style=color:#95cc5e;>add_raw_template</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"post"</span><span style=color:#e8d4c0;>, include_str!(</span><span style=color:#eaae2e;>"../tmpl/post.html"</span><span style=color:#e8d4c0;>)) {
+</span><span style=color:#e8d4c0;>        println!(</span><span style=color:#eaae2e;>"Parsing error(s): </span><span style=color:#db784d;>{}</span><span style=color:#eaae2e;>"</span><span style=color:#e8d4c0;>, e);
+</span><span style=color:#e8d4c0;>        ::std::process::exit(</span><span style=color:#eaae2e;>1</span><span style=color:#e8d4c0;>);
+</span><span style=color:#e8d4c0;>    };
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    tera.</span><span style=color:#95cc5e;>autoescape_on</span><span style=color:#e8d4c0;>(vec![]); </span><span style=color:#7a7267;>// Disable auto escape.
+</span><span style=color:#e8d4c0;>    tera
+</span><span style=color:#e8d4c0;>});
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#db784d;>pub </span><span style=color:#95cc5e;>struct </span><span style=color:#e8d4c0;>Doc {
+</span><span style=color:#e8d4c0;>    </span><span style=color:#db784d;>pub </span><span style=color:#f8bb39;>meta</span><span style=color:#e8d4c0;>: MdHeader,
+</span><span style=color:#e8d4c0;>    </span><span style=color:#db784d;>pub </span><span style=color:#f8bb39;>content</span><span style=color:#e8d4c0;>: String,
+</span><span style=color:#e8d4c0;>}
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#db784d;>pub </span><span style=color:#95cc5e;>fn </span><span style=color:#60a365;>render_post</span><span style=color:#e8d4c0;>(</span><span style=font-style:italic;color:#f8bb39;>filename</span><span style=color:#e8d4c0;>: </span><span style=color:#db784d;>&</span><span style=color:#95cc5e;>str</span><span style=color:#e8d4c0;>, </span><span style=font-style:italic;color:#f8bb39;>doc</span><span style=color:#e8d4c0;>: </span><span style=color:#db784d;>&</span><span style=color:#95cc5e;>str</span><span style=color:#e8d4c0;>) -> Option&LTDoc> {
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let </span><span style=font-style:italic;color:#db784d;>Some</span><span style=color:#e8d4c0;>(doc) </span><span style=color:#db784d;>= </span><span style=color:#e8d4c0;>MdDoc::from_file(filename, doc) </span><span style=color:#db784d;>else </span><span style=color:#e8d4c0;>{
+</span><span style=color:#e8d4c0;>        </span><span style=color:#db784d;>return </span><span style=font-style:italic;color:#db784d;>None</span><span style=color:#e8d4c0;>;
+</span><span style=color:#e8d4c0;>    };
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=color:#7a7267;>// Setup the post context:
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let </span><span style=color:#db784d;>mut</span><span style=color:#e8d4c0;> context </span><span style=color:#db784d;>= </span><span style=color:#e8d4c0;>Context::new();
+</span><span style=color:#e8d4c0;>    context.</span><span style=color:#95cc5e;>insert</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"title"</span><span style=color:#e8d4c0;>, </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>doc.meta.title);
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> date </span><span style=color:#db784d;>= &</span><span style=color:#e8d4c0;>doc.meta.date;
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> date_str </span><span style=color:#db784d;>= </span><span style=color:#e8d4c0;>format!(</span><span style=color:#eaae2e;>"</span><span style=color:#db784d;>{}</span><span style=color:#eaae2e;>/</span><span style=color:#db784d;>{}</span><span style=color:#eaae2e;>/</span><span style=color:#db784d;>{}</span><span style=color:#eaae2e;>"</span><span style=color:#e8d4c0;>, date.</span><span style=color:#95cc5e;>day</span><span style=color:#e8d4c0;>(), date.</span><span style=color:#95cc5e;>month</span><span style=color:#e8d4c0;>(), date.</span><span style=color:#95cc5e;>year</span><span style=color:#e8d4c0;>());
+</span><span style=color:#e8d4c0;>    context.</span><span style=color:#95cc5e;>insert</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"date"</span><span style=color:#e8d4c0;>, </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>date_str);
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=color:#7a7267;>// Get the size + the extra size from the html.
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> size </span><span style=color:#db784d;>=</span><span style=color:#e8d4c0;> doc.content.</span><span style=color:#95cc5e;>len</span><span style=color:#e8d4c0;>() </span><span style=color:#db784d;>+ </span><span style=color:#eaae2e;>1930</span><span style=color:#e8d4c0;>;
+</span><span style=color:#e8d4c0;>    context.</span><span style=color:#95cc5e;>insert</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"size"</span><span style=color:#e8d4c0;>, </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>size);
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    context.</span><span style=color:#95cc5e;>insert</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"description"</span><span style=color:#e8d4c0;>, </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>doc.meta.desc);
+</span><span style=color:#e8d4c0;>    context.</span><span style=color:#95cc5e;>insert</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"article"</span><span style=color:#e8d4c0;>, </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>doc.content.</span><span style=color:#95cc5e;>trim</span><span style=color:#e8d4c0;>());
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=color:#7a7267;>// Render the post.
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> content </span><span style=color:#db784d;>= TEMPLATES</span><span style=color:#e8d4c0;>.</span><span style=color:#95cc5e;>render</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"post"</span><span style=color:#e8d4c0;>, </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>context).</span><span style=color:#95cc5e;>unwrap</span><span style=color:#e8d4c0;>();
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> content </span><span style=color:#db784d;>= </span><span style=color:#95cc5e;>from_utf8</span><span style=color:#e8d4c0;>(</span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>minify_html::minify(
+</span><span style=color:#e8d4c0;>        content.</span><span style=color:#95cc5e;>as_bytes</span><span style=color:#e8d4c0;>(),
+</span><span style=color:#e8d4c0;>        </span><span style=color:#db784d;>&</span><span style=color:#e8d4c0;>minify_html::Cfg::default(),
+</span><span style=color:#e8d4c0;>    ))
+</span><span style=color:#e8d4c0;>    .</span><span style=color:#95cc5e;>expect</span><span style=color:#e8d4c0;>(</span><span style=color:#eaae2e;>"failed to minify post"</span><span style=color:#e8d4c0;>).</span><span style=color:#95cc5e;>to_string</span><span style=color:#e8d4c0;>();
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> real_size </span><span style=color:#db784d;>= &</span><span style=color:#e8d4c0;>(content.</span><span style=color:#95cc5e;>len</span><span style=color:#e8d4c0;>() </span><span style=color:#db784d;>as </span><span style=color:#95cc5e;>f32 </span><span style=color:#db784d;>* </span><span style=color:#eaae2e;>0.001</span><span style=color:#e8d4c0;>);
+</span><span style=color:#e8d4c0;>    </span><span style=color:#95cc5e;>let</span><span style=color:#e8d4c0;> real_size_str </span><span style=color:#db784d;>= </span><span style=color:#e8d4c0;>format!(</span><span style=color:#eaae2e;>"</span><span style=color:#db784d;>{:.2}</span><span style=color:#eaae2e;> kB"</span><span style=color:#e8d4c0;>, real_size);
+</span><span style=color:#e8d4c0;>    println!(</span><span style=color:#eaae2e;>"</span><span style=color:#db784d;>{}\n</span><span style=color:#eaae2e;>- size: </span><span style=color:#db784d;>{}</span><span style=color:#eaae2e;>"</span><span style=color:#e8d4c0;>, filename, real_size_str);
+</span><span style=color:#e8d4c0;>
+</span><span style=color:#e8d4c0;>    </span><span style=font-style:italic;color:#db784d;>Some</span><span style=color:#e8d4c0;>(Doc {
+</span><span style=color:#e8d4c0;>        meta: doc.meta,
+</span><span style=color:#e8d4c0;>        content,
+</span><span style=color:#e8d4c0;>    })
+</span><span style=color:#e8d4c0;>}
+</span>
+</code></pre></article><footer>© 2023 Max, All rights reserved.</footer></main>

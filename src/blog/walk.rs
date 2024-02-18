@@ -20,6 +20,14 @@ pub fn walk_posts(posts: &mut Vec<MdHeader>, dir: &Path, out: &Path, cb: &dyn Fn
         }
 
         // Parse if it is a post.
+        if let Some(ext) = path.extension() {
+            if "md" != ext.to_string_lossy() {
+                continue;
+            }
+        } else {
+            continue;
+        }
+
         let doc = cb(&path.as_path());
         posts.push(doc.meta);
 

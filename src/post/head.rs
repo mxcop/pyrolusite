@@ -33,27 +33,29 @@ impl Serialize for MdHeader {
     }
 }
 
-/// Parse the header of a markdown document.
-pub fn parse_md_header(filename: &str, doc: &str) -> Option<MdHeader> {
-    // Capture the document header:
-    let Some(captures) = REGEX_SELECT_HEADER.captures(doc) else {
-        return None;
-    };
+impl MdHeader {
+    /// Parse the header of a markdown file.
+    pub fn from_file(filename: &str, doc: &str) -> Option<Self> {
+        // Capture the document header:
+        let Some(captures) = REGEX_SELECT_HEADER.captures(doc) else {
+            return None;
+        };
 
-    // Get the lines from the header.
-    let mut header = captures[1].lines();
+        // Get the lines from the header.
+        let mut header = captures[1].lines();
 
-    // Extract the header components:
-    let title = header.next().unwrap_or("Not Found").to_string();
-    let date = header.next().unwrap_or("Unknown");
-    let desc = header
-        .filter(|&line| !line.is_empty())
-        .collect::<Vec<&str>>()
-        .join("\n\r");
+        // Extract the header components:
+        let title = header.next().unwrap_or("Not Found").to_string();
+        let date = header.next().unwrap_or("Unknown");
+        let desc = header
+            .filter(|&line| !line.is_empty())
+            .collect::<Vec<&str>>()
+            .join("\n\r");
 
-    // Parse the date into a naive date.
-    let date = NaiveDate::parse_from_str(date, "%d/%m/%Y").unwrap_or(NaiveDate::MIN);
-    let url = filename.to_string();
+        // Parse the date into a naive date.
+        let date = NaiveDate::parse_from_str(date, "%d/%m/%Y").unwrap_or(NaiveDate::MIN);
+        let url = filename.to_string();
 
-    Some(MdHeader { title, date, url, desc })
+        Some(MdHeader { title, date, url, desc })
+    }
 }

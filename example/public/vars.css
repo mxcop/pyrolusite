@@ -1,0 +1,20 @@
+:root {
+    --bg: #131414;
+    --text: #fff;
+    --text-dim: #555;
+    --border: #fff2;
+    --navbar: hsla(0,0%,7%,.8);
+
+    --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+
+@font-face {
+    font-family: Monocraft;
+    src: url(./fonts/monocraft.otf);
+}
+
+@font-face {
+    font-family: Rokkitt;
+    src: url(./fonts/rokkitt.woff2);
+}

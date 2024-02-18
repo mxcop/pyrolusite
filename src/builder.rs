@@ -12,7 +12,7 @@ pub fn build(path: &String, output: &String, styles: &String) -> io::Result<()> 
 
     fs::write(Path::new(output).join("./index.html"), &home)?;
 
-    let style_path = Path::new(styles);
+    let style_path = Path::new(path).join(styles);
     if style_path.exists() {
         // Copy all stylesheets to the `/dist` directory.
         copy_recursively(style_path, Path::new(output))?;
@@ -36,18 +36,23 @@ fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> 
         }
 
         // Copy the file.
-        let file = fs::read_to_string(&path)?;
         let Some(ext) = path.extension() else {
             continue;
         };
 
         // Minify if the file is .css
-        let minified = if ext == "css" {
-            Minifier::default().minify(&file, Level::Three).expect("failed to minify css")
+        if ext == "css" {
+            let file = fs::read_to_string(&path)?;
+            let minified = Minifier::default().minify(&file, Level::Three).expect("failed to minify css");
+            fs::write(destination.as_ref().join(&filename), &minified)?;
         } else {
-            file
+            if let Ok(file) = fs::read_to_string(&path) {
+                fs::write(destination.as_ref().join(&filename), &file)?;
+            } else {
+                let file = fs::read(&path)?;
+                fs::write(destination.as_ref().join(&filename), &file)?;
+            }
         };
-        fs::write(destination.as_ref().join(&filename), &minified)?;
     }
     Ok(())
 }

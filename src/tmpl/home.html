@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pyrolusite</title>
+    <meta name="description" content="The blog of Max (mxcop)">
+    <meta name="author" content="Max (mxcop)">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <main class="home">
+        <h3>Pyrolusite</h3>
+
+        <nav>
+            <h2>Posts</h2>
+            {% for post in posts %}
+                <a href="{{ post.url }}">{{ post.title }}</a>
+            {% endfor %}
+        </nav>
+    
+        <footer>
+            © 2023 Max, All rights reserved.
+        </footer>
+    </main>
+</body>
+</html>

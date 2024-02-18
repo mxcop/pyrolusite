@@ -21,7 +21,7 @@ pub enum Commands {
         #[arg(short, long, default_value = "./build/")]
         output: String,
         /// Copied into the build directory if it exists.
-        #[arg(short, long, default_value = "./styles/")]
+        #[arg(short, long, default_value = "./public/")]
         styles: String,
     }
 }

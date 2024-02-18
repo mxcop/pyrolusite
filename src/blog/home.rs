@@ -7,7 +7,7 @@ use once_cell::sync::Lazy;
 pub static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
     let mut tera = Tera::default();
 
-    if let Err(e) = tera.add_raw_template("home", include_str!("../../static/home.html")) {
+    if let Err(e) = tera.add_raw_template("home", include_str!("../tmpl/home.html")) {
         println!("Parsing error(s): {}", e);
         ::std::process::exit(1);
     };
